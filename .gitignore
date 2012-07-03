@@ -22,3 +22,6 @@
 *.lst
 *.HEX
 *.O
+
+#Windows BS
+*.db

@@ -25,6 +25,12 @@ void low_isr_entry(void){
 
 #pragma interrupt high_isr
 void high_isr(void){
+	if(INTCONbits.TMR0IF == 1){
+		INTCONbits.TMR0IF = 0;
+		TMR0H = 0x0B;						// Set timer 0 to 3036
+		TMR0L = 0xDC;						//  - Total of 62500 counts to go.
+		PORTD ^= 1;
+	}
 }
 
 #pragma interruptlow low_isr
@@ -44,21 +50,14 @@ void setup(){
 	T0CONbits.T08BIT = 0;				// Use Timer 0 as a 16 bit timer.
 	T0CONbits.TMR0ON = 1;				// Enable Timer 0
 	INTCONbits.TMR0IF = 0;				// Set Timer 0 Flag to 0, just to be sure
-	//INTCONbits.TRM0IE = 1;			// Enable INT0 Interrupt
-	//INTCONbits.GIE = 1;				// Enable Interrups Globally
+	INTCONbits.TMR0IE = 1;			// Enable INT0 Interrupt
+	INTCONbits.GIE = 1;				// Enable Interrups Globally
 }
 
 
 void main(void) { 
 	setup();
 	while(1)	{
-		if(INTCONbits.TMR0IF == 1){
-			INTCONbits.TMR0IF = 0;
-			TMR0H = 0x0B;						// Set timer 0 to 3036
-			TMR0L = 0xDC;						//  - Total of 62500 counts to go.
-			PORTD ^= 1;
-		}
 	}
 }
-
 

@@ -63,10 +63,10 @@ void setup(){
 	INTCON2bits.INTEDG1 = 0;			//Set Rising/Falling Edge Sensitivty
 	INTCON3bits.INT1IF = 0;				// Set INT1 Flag to 0
 	INTCON3bits.INT1IE = 1;				// Enable INT1 Interrupt
-	* /
+	*/
 	INTCONbits.RBIE = 1					//Enable the PORTB<7:4> Interrupt
 	INTCON2bits.RBPU = 0;				//Enable PortB Pull-Ups
-	*/
+	
 
 	T0CONbits.T0CS = 0;					//Clock from interal clock
 	T0CONbits.PSA = 1;					//No Prescaler
