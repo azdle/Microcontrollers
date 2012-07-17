@@ -36,12 +36,21 @@ void setup(){
 
 }
 
+void myFunc(char n, char m){
+	char i, j, k, sum, in_order, loop_cnt;
+	i++;
+	loop_cnt++;
+
+	n++;
+	m++;
+}
+
 
 void main(void) { 
-	setup();
-	while(1)	{
+	char x;
+	x = 45;
+	myFunc(23, x);
 
-	}
 }
 
 

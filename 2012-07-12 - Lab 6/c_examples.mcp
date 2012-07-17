@@ -25,36 +25,12 @@ subfolder_lib=
 subfolder_lkr=
 [FILE_SUBFOLDERS]
 file_000=.
-file_001=.
-file_002=.
-file_003=.
-file_004=.
-file_005=.
-file_006=.
 [GENERATED_FILES]
 file_000=no
-file_001=no
-file_002=no
-file_003=no
-file_004=no
-file_005=no
-file_006=no
 [OTHER_FILES]
 file_000=no
-file_001=yes
-file_002=yes
-file_003=yes
-file_004=yes
-file_005=yes
-file_006=yes
 [FILE_INFO]
-file_000=USART.c
-file_001=main.c
-file_002=Long Timer 0 - Interrupts.c
-file_003=Timer 2.c
-file_004=ADC 1 Sec Polling
-file_005=Stack.c
-file_006=ADC 1 Sec Polling.c
+file_000=main.c
 [SUITE_INFO]
 suite_guid={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
 suite_state=

@@ -9,7 +9,10 @@ void high_isr(void);
 void low_isr(void);
 
 //######### Variables ################
+#define BUFSIZE 16      /* power of two should compile efficiently */
 
+volatile unsigned char txfifo[BUFSIZE];
+volatile unsigned txrd=0, txwr=0;       /* read and write positions */
 
 //######### Interrupts ################
 #pragma code high_isr_entry=8
@@ -25,22 +28,56 @@ void low_isr_entry(void){
 
 #pragma interrupt high_isr
 void high_isr(void){
+	if(PIR1bits.RCIF = 1){
+		//Receive byte
+	}
+	
+	if(PIR1bits.TXIF = 1){
+		//Trasnmit Byte
+		TXREG = readTxBuffer();
+	}
+	
+	
 }
 
 #pragma interruptlow low_isr
 void low_isr(void){
+	
 }
 
 //######### Functions ################
-void setup(){
 
+void TX(char byteToSend){
+	/* write a byte into FIFO */
+	txfifo[txwr++] = byteToSend;
+}
+
+char readTxBuffer(){
+	//Read a byte from fifo
+	  return txfifo[txrd++];
+}
+
+char bytesInTxBuffer(){
+	return txwr - txrd;
+}
+
+void setup(){
+	TXSTA = 0b00100100;
+	RCSTA = 0b10100000;
+	BAUDCON = 0b00001000;
+	SPBRGH = 2437 >> 8;
+	SPBRG = 2437;
+	
+	PIR1bits.RCIE = 1;
+	PIR1bits.TXIE = 1;
+	INTCONbits.GIE = 1;
 }
 
 
 void main(void) { 
 	setup();
 	while(1)	{
-
+	
 	}
 }
 

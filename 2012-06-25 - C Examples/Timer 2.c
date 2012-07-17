@@ -25,6 +25,10 @@ void low_isr_entry(void){
 
 #pragma interrupt high_isr
 void high_isr(void){
+	if(PIR1bits.TMR2IF == 1){
+		PIR1bits.TMR2IF = 0;
+		PORTD ^= 1;
+	}
 }
 
 #pragma interruptlow low_isr
@@ -33,7 +37,13 @@ void low_isr(void){
 
 //######### Functions ################
 void setup(){
-
+	TRISB = 0x03;						// set RB0, RB1 to input
+	
+	T2CON = 0b00000100;
+	PIE1bits.TMR2IE = 1;
+	PIR1bits.TMR2IF = 0;
+	INTCONbits.PEIE = 1;				// Enable Perrifal Interrups
+	INTCONbits.GIE = 1;				// Enable Interrups Globally
 }
 
 
