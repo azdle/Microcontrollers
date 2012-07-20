@@ -1,0 +1,4 @@
+wait 20 ms
+0D 20 25
+wait 30 us
+"This is some Text"

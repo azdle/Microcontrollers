@@ -10,8 +10,7 @@ void low_isr(void);
 void setup(void);
 
 //######### Variables ################
-volatile unsigned char txbuf;
-volatile unsigned char rxbuf;
+
 
 //######### Interrupts ################
 #pragma code high_isr_entry=8
@@ -27,41 +26,43 @@ void low_isr_entry(void){
 
 #pragma interrupt high_isr
 void high_isr(void){
-	if(PIR1bits.RCIF = 1){
-		//Receive byte
-		rxbuf = RCREG;
+	if(PIR1bits.CCP1IF == 1){
+		TMR3L = 0;
+		TMR3H = 0;
 	}
-	
-	if(PIR1bits.TXIF = 1){
-		//Trasnmit Byte
-		TXREG = rxbuf;
-	}	
 }
 
 #pragma interruptlow low_isr
 void low_isr(void){
-	
 }
 
 //######### Functions ################
-
 void setup(){
-	TXSTA = 0b00100000;
-	RCSTA = 0b10010000;
-	BAUDCON = 0b00001000;
-	SPBRGH = 2437 >> 8;
-	SPBRG = 2437;
+	TRISCbits.TRISC2 = 1;
 	
-	PIE1bits.RCIE = 1;
-	PIE1bits.TXIE = 1;
+	//TMR3
+	T3CONbits.RD16 = 1;
+	T3CONbits.T3CCP2 = 1;
+	T3CONbits.TMR3ON = 1;
+
+	//CCP1
+	CCP1CONbits.CCP1M3 = 0;
+	CCP1CONbits.CCP1M2 = 1;
+	CCP1CONbits.CCP1M1 = 0;
+	CCP1CONbits.CCP1M0 = 1;
+
+	//Interrupts
+	PIE1bits.CCP1IE = 1;
 	INTCONbits.PEIE = 1;
 	INTCONbits.GIE = 1;
+	
 }
 
 
 void main(void) { 
 	setup();
 	while(1)	{
+
 	}
 }
 
