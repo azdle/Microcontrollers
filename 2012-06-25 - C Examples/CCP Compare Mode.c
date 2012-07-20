@@ -4,12 +4,12 @@
 #pragma config BOR=OFF, PWRT=ON, LVP=OFF, FOSC=HSPLL_HS, FCMEN=OFF, VREGEN=OFF
 #pragma config MCLRE=ON, STVREN=ON, LPT1OSC=ON, PBADEN=OFF
 
-//######### Function Declarations ################
+//####### Function Declarations #######
 void high_isr(void);
 void low_isr(void);
 void setup(void);
 
-//######### Variables ################
+//######### Variables #################
 
 
 //######### Interrupts ################
@@ -29,15 +29,11 @@ void high_isr(void){
 	static unsigned int periodStart = 0;
 	static unsigned long int period = 0;
 	static unsigned char overflowCounter = 0;
+	char temp;
 	if(PIR1bits.CCP1IF == 1){
 		PIR1bits.CCP1IF = 0;
-		period = CCPR1 - periodStart + (((long int)overflowCounter) << 16);
-		periodStart = CCPR1;
-		overflowCounter = 0;
-	}
-	if(PIR2bits.TMR3IF == 1){
-		PIR1bits.TMR2IF = 0;
-		overflowCounter++;
+		temp = TMR3L;
+		CCPR1 += 6000;
 	}
 }
 
@@ -54,11 +50,13 @@ void setup(){
 	T3CONbits.T3CCP2 = 1;
 	T3CONbits.TMR3ON = 1;
 
-	//CCP1
+	//CCP1 - Compare & Toggle Mode
 	CCP1CONbits.CCP1M3 = 0;
-	CCP1CONbits.CCP1M2 = 1;
-	CCP1CONbits.CCP1M1 = 0;
-	CCP1CONbits.CCP1M0 = 1;
+	CCP1CONbits.CCP1M2 = 0;
+	CCP1CONbits.CCP1M1 = 1;
+	CCP1CONbits.CCP1M0 = 0;
+
+	CCPR1 = 6000;
 
 	//Interrupts
 	PIE1bits.CCP1IE = 1;
