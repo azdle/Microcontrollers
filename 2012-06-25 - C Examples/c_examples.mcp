@@ -34,8 +34,6 @@ file_006=.
 file_007=.
 file_008=.
 file_009=.
-file_010=.
-file_011=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
@@ -47,8 +45,6 @@ file_006=no
 file_007=no
 file_008=no
 file_009=no
-file_010=no
-file_011=no
 [OTHER_FILES]
 file_000=no
 file_001=yes
@@ -60,21 +56,17 @@ file_006=yes
 file_007=yes
 file_008=yes
 file_009=yes
-file_010=yes
-file_011=yes
 [FILE_INFO]
-file_000=CCP Compare Mode.c
+file_000=CCP Compare Mode - Siren.c
 file_001=main.c
 file_002=Long Timer 0 - Interrupts.c
 file_003=Timer 2.c
-file_004=ADC 1 Sec Polling
-file_005=Stack.c
-file_006=ADC 1 Sec Polling.c
-file_007=uart.txt
-file_008=USART.c
-file_009=CCP Period Timer
-file_010=CCP.c
-file_011=CCP Period Timer.c
+file_004=Stack.c
+file_005=ADC 1 Sec Polling.c
+file_006=USART.c
+file_007=CCP.c
+file_008=CCP Period Timer.c
+file_009=CCP Compare Mode.c
 [SUITE_INFO]
 suite_guid={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
 suite_state=
