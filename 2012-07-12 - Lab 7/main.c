@@ -9,9 +9,13 @@
 void high_isr(void);
 void low_isr(void);
 void setup();
+void writeNewADCValue(unsigned int);
+void readADCAverageASCII();
 
 //######### Variables ################
 volatile unsigned char sentFlag = 0;
+volatile unsigned int ADCAverage = 0;
+volatile unsigned char ASCIIString[7];
 
 //######### Interrupts ################
 #pragma code high_isr_entry=8
@@ -28,25 +32,20 @@ void low_isr_entry(void){
 void high_isr(void){
 	static unsigned char step = 0;
 	if(PIR1bits.TXIF == 1){
-		if(step == 0){
-			TXREG = ADRESH;
-			step = 1;
-		}else if(step == 1){
-			TXREG = ADRESL;
-			step = 2;
-		}else if(step == 2){
-			TXREG = 10;								//New Line
+		if(step == 7){
+			TXREG = 10; //Line Return, TODO Change to Carrage Return 0x0D
 			step = 0;
-			PIE1bits.TXIE = 0;
-			ADCON0bits.GO_DONE = 1;
-			sentFlag = 0;
 		}else{
-			step = 0;
+			if (step == 0){
+				readADCAverageASCII();
+			}
+			TXREG = ASCIIString[step++];
 		}
 	}
 	if(PIR1bits.ADIF == 1){
 		PIR1bits.ADIF = 0;
-		PIE1bits.TXIE = 1;
+		writeNewADCValue(ADRES);
+		ADCON0bits.GO_DONE = 1;
 	}
 		
 }
@@ -70,13 +69,30 @@ void setup(){
 	ADCON0 = 0b00000001;
 	ADCON0bits.GO_DONE = 1;
 	
-	PIE1bits.TXIE = 0;
+	PIE1bits.TXIE = 1;
 	PIE1bits.ADIE = 1;
 	INTCONbits.PEIE = 1;
 	INTCONbits.GIE = 1;
 }
 
-unsigned int binToASCII(
+void writeNewADCValue(unsigned int value){
+	ADCAverage = (ADCAverage + value)/2;  //Can't do moving average, not enough ram.
+}
+
+void readADCAverageASCII(){
+	float voltage;
+	long lWhole, ulPart;
+
+	voltage = ((float)(ADCAverage*5))/1024;
+	//Convert number from float to fixed point for display.
+	//The number is converted to two parts.
+	lWhole=(long)(voltage);
+	ulPart=(long)(voltage*100)-lWhole*100;
+	
+	sprintf(ASCIIString, (char *)"%li.%li\n",lWhole,ulPart);
+
+}
+	
 
 void main(void) { 
 	setup();
