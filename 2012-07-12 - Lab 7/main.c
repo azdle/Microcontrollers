@@ -15,7 +15,7 @@ void readADCAverageASCII();
 //######### Variables ################
 volatile unsigned char sentFlag = 0;
 volatile unsigned int ADCAverage = 0;
-volatile unsigned char ASCIIString[7];
+volatile char ASCIIString[7];
 
 //######### Interrupts ################
 #pragma code high_isr_entry=8
@@ -33,7 +33,7 @@ void high_isr(void){
 	static unsigned char step = 0;
 	if(PIR1bits.TXIF == 1){
 		if(step == 7){
-			TXREG = 10; //Line Return, TODO Change to Carrage Return 0x0D
+			TXREG = 0x0D; //Line Return, TODO Change to Carrage Return 0x0D
 			step = 0;
 		}else{
 			if (step == 0){
@@ -58,6 +58,7 @@ void low_isr(void){
 //######### Functions ################
 void setup(){
 	TRISA = 1;
+	TRISC = 0x11000000;
 
 	TXSTA = 0b00100100;
 	RCSTA = 0b10000000;
@@ -81,16 +82,23 @@ void writeNewADCValue(unsigned int value){
 
 void readADCAverageASCII(){
 	float voltage;
-	long lWhole, ulPart;
+	unsigned int lWhole, ulPart;
+	unsigned int i, smallPart, lastSmallPart;
 
 	voltage = ((float)(ADCAverage*5))/1024;
-	//Convert number from float to fixed point for display.
-	//The number is converted to two parts.
-	lWhole=(long)(voltage);
-	ulPart=(long)(voltage*100)-lWhole*100;
+	lWhole=(voltage);
+	ulPart=(voltage*100000)-lWhole*100000;
 	
-	sprintf(ASCIIString, (char *)"%li.%li\n",lWhole,ulPart);
-
+	ASCIIString[0] = lWhole +48;
+	ASCIIString[1] = 46;	//Carrage Return
+	lastSmallPart = ulPart;
+	for(i = 6; i >= 2; i--){
+		smallPart = lastSmallPart/10;
+		ASCIIString[i] = (lastSmallPart-(smallPart*10)) +48;
+		lastSmallPart = smallPart;
+		Nop();
+	}
+	Nop();
 }
 	
 
