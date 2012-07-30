@@ -37,6 +37,7 @@ file_009=.
 file_010=.
 file_011=.
 file_012=.
+file_013=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
@@ -51,6 +52,7 @@ file_009=no
 file_010=no
 file_011=no
 file_012=no
+file_013=no
 [OTHER_FILES]
 file_000=no
 file_001=yes
@@ -65,8 +67,9 @@ file_009=yes
 file_010=yes
 file_011=yes
 file_012=yes
+file_013=yes
 [FILE_INFO]
-file_000=CORDIC.c
+file_000=PWM.c
 file_001=main.c
 file_002=Long Timer 0 - Interrupts.c
 file_003=Timer 2.c
@@ -79,6 +82,7 @@ file_009=CCP Compare Mode.c
 file_010=SPI Read - Temp One Shot.c
 file_011=CCP Compare Mode - Siren.c
 file_012=SPI Read - External ADC.c
+file_013=CORDIC.c
 [SUITE_INFO]
 suite_guid={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
 suite_state=
