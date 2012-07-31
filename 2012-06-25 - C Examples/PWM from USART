@@ -42,13 +42,23 @@ void setup(){
 	CCP1CONbits.CCP1M3 = 1;
 	CCP1CONbits.CCP1M2 = 1;
 
-	PR2 = 99;
+	PR2 = 249;
 	CCPR1L = 100;
 
 	T2CONbits.T2CKPS1 = 0;
 	T2CONbits.T2CKPS0 = 1;
 	T2CONbits.TMR2ON = 1;
 
+	TXSTA = 0b00100000;
+	RCSTA = 0b10010000;
+	BAUDCON = 0b00001000;
+	SPBRGH = 2437 >> 8;
+	SPBRG = 2437;
+	
+	PIE1bits.RCIE = 1;
+	PIE1bits.TXIE = 1;
+	INTCONbits.PEIE = 1;
+	INTCONbits.GIE = 1;
 	
 }
 
