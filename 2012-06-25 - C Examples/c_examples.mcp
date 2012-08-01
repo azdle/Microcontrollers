@@ -40,6 +40,7 @@ file_012=.
 file_013=.
 file_014=.
 file_015=.
+file_016=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
@@ -57,6 +58,7 @@ file_012=no
 file_013=no
 file_014=no
 file_015=no
+file_016=no
 [OTHER_FILES]
 file_000=no
 file_001=yes
@@ -74,8 +76,9 @@ file_012=yes
 file_013=yes
 file_014=yes
 file_015=yes
+file_016=yes
 [FILE_INFO]
-file_000=PWM from USART.c
+file_000=SF S11 P3.c
 file_001=main.c
 file_002=Long Timer 0 - Interrupts.c
 file_003=Timer 2.c
@@ -91,6 +94,7 @@ file_012=SPI Read - External ADC.c
 file_013=CORDIC.c
 file_014=PWM.c
 file_015=PWM from USART
+file_016=PWM from USART.c
 [SUITE_INFO]
 suite_guid={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
 suite_state=

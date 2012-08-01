@@ -15,6 +15,19 @@ ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
 DebugOptions=-D__DEBUG
 [File001]
+Location=Z:\Microcontrollers\2012-06-25 - C Examples\SF S11 P3.o
+Folder=Intermediary
+DeviceName=PIC18F4550
+LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
+LanguageToolID={E56A1C86-9D32-4DF6-8C34-FE0388B1B644}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc18\v3.40\bin\mcc18.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc18\v3.40\lib||$(LKRDIR)||
+SOLK=<src>|SF S11 P3.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File002]
 Location=Z:\Microcontrollers\2012-06-25 - C Examples\c_examples.cof
 Folder=Output
 DeviceName=PIC18F4550
@@ -22,12 +35,12 @@ LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
 LanguageToolID={96C98149-AA1B-4CF9-B967-FAE79CAB663C}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc18\v3.40\bin\mplink.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc18\v3.40\lib||$(LKRDIR)||
-SOLK=<src>|PWM from USART.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|SF S11 P3.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=/o"$(BINDIR_)$(TARGETBASE).cof" /M"$(BINDIR_)$(TARGETBASE).map" /W
 TraceCmdString=
 DebugOptions=/z__MPLAB_DEBUG=1
-[File002]
+[File003]
 Location=Z:\Microcontrollers\2012-06-25 - C Examples\c_examples.hex
 Folder=Output
 DeviceName=PIC18F4550
@@ -35,7 +48,7 @@ LanguageToolSuiteID={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
 LanguageToolID={96C98149-AA1B-4CF9-B967-FAE79CAB663C}
 LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc18\v3.40\bin\mplink.exe
 PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc18\v3.40\lib||$(LKRDIR)||
-SOLK=<src>|PWM from USART.c||<obj>||<lib>||<lkr>||
+SOLK=<src>|SF S11 P3.c||<obj>||<lib>||<lkr>||
 SuiteArgsString=
 ToolArgsString=/o"$(BINDIR_)$(TARGETBASE).cof" /M"$(BINDIR_)$(TARGETBASE).map" /W
 TraceCmdString=
